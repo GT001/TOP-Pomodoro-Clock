@@ -27,7 +27,7 @@ function control(e){
 }
 
 function sessionTimes(button){
-	msg("here")
+	
 	var element;
 	if(button == "workplus" || button == "workminus" ){
 		element = "work";
@@ -35,8 +35,30 @@ function sessionTimes(button){
 		element = "break";
 	}
 
-	var setTime = document.querySelector($element)
-	msg(setTime);
+	var setTime = document.querySelector(`#${element}`)
+	
+	var text = setTime.textContent;
+
+	var minutes = parseInt(text.slice(0,text.indexOf(":")));
+
+	if (button == "workplus" || button == "breakplus"){
+		minutes++;
+	} else {
+		minutes--;
+	}
+
+	if(minutes < 10){ 
+		text = "0";
+	} else {
+		text = "";
+	}
+
+	text = text + minutes + ":00";
+
+	setTime.textContent = text;
+
+	msg(minutes);
+	msg(text);
 }
 
 function msg(content)
